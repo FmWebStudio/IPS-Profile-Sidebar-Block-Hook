@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Created: Fm Web & CYBERSPACE
+http://fm-web.studio/
+http://cyberspace.community/
+-->
+<hookexport>
+  <hookdata>
+    <config>
+      <hook_name><![CDATA[(fmw-IPB34) Profile Sidebar Block]]></hook_name>
+      <hook_desc><![CDATA[Добавляет боковой блок с информацией о профиле.
+<br/>Разработка <a href="http://fm-web.studio/">Fm Web</a> &amp; <a href="http://cyberspace.community/">CYBERSPACE</a>.]]></hook_desc>
+      <hook_author>Fm Web (Recouse)</hook_author>
+      <hook_email>info@fm-web.studio</hook_email>
+      <hook_website>http://fm-web.studio</hook_website>
+      <hook_update_check/>
+      <hook_requirements><![CDATA[a:3:{s:21:"required_applications";a:0:{}s:20:"hook_php_version_min";s:1:"0";s:20:"hook_php_version_max";s:1:"0";}]]></hook_requirements>
+      <hook_version_human>1.1.0</hook_version_human>
+      <hook_version_long>11000</hook_version_long>
+      <hook_extra_data><![CDATA[a:6:{s:7:"display";a:4:{s:8:"settings";s:64:"Группа настроек: (fmw-IPB34) Profile Sidebar Block";s:9:"templates";s:35:"От skin_boards: fmw_Profile_Block";s:3:"css";s:33:"CSS файлы: fmw_profile_block";s:8:"language";s:88:"From core_public_global: fmw_psb_posts, fmw_psb_reputation, fmw_psb_title, fmw_psb_views";}s:13:"settingGroups";a:1:{i:0;s:16:"fmw_psb_settings";}s:8:"settings";a:1:{i:0;s:10:"fmw_psb_on";}s:9:"templates";a:1:{s:11:"skin_boards";a:1:{s:17:"fmw_Profile_Block";s:17:"fmw_Profile_Block";}}s:3:"css";a:1:{s:17:"fmw_profile_block";s:17:"fmw_profile_block";}s:8:"language";a:1:{s:18:"core_public_global";a:4:{i:0;s:13:"fmw_psb_posts";i:1;s:18:"fmw_psb_reputation";i:2;s:13:"fmw_psb_title";i:3;s:13:"fmw_psb_views";}}}]]></hook_extra_data>
+      <hook_key>fmwIPB3_profileSidebarBlock</hook_key>
+      <hook_global_caches/>
+    </config>
+  </hookdata>
+  <hookfiles>
+    <file>
+      <hook_file_real>fmw_profile_block.php</hook_file_real>
+      <hook_type>templateHooks</hook_type>
+      <hook_classname>fmw_Profile_Block</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:11:"skin_boards";s:12:"skinFunction";s:18:"boardIndexTemplate";s:4:"type";s:7:"foreach";s:2:"id";s:11:"side_blocks";s:8:"position";s:9:"outer.pre";}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+class fmw_Profile_Block
+{
+  public function __construct()
+  {
+    $this->registry = ipsRegistry::instance();
+    $this->memberData =& $this->registry->member()->fetchMemberData();
+    $this->settings =& $this->registry->fetchSettings();
+  }
+
+  public function getOutput()
+  {
+    if($this->memberData['member_id'] != 0 && $this->settings['fmw_psb_on'] == 1){
+      return $this->registry->getClass('output')->getTemplate('boards')->fmw_Profile_Block();
+    }
+  }
+}
+?>]]></hooks_source>
+    </file>
+  </hookfiles>
+  <hookextras_settings>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_title><![CDATA[(FMW34 & CSI34) Profile Sidebar Block]]></conf_title_title>
+      <conf_title_desc/>
+      <conf_title_noshow>0</conf_title_noshow>
+      <conf_title_keyword>fmw_psb_settings</conf_title_keyword>
+      <conf_title_app>core</conf_title_app>
+      <conf_title_tab>Hooks</conf_title_tab>
+    </setting>
+    <setting>
+      <conf_id>648</conf_id>
+      <conf_title><![CDATA[Включить хук?]]></conf_title>
+      <conf_description><![CDATA[Выводить блок профиля в боковой панели форума.]]></conf_description>
+      <conf_group>57</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>fmw_psb_on</conf_key>
+      <conf_value/>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>0</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>fmw_psb_settings</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+  </hookextras_settings>
+  <hookextras_language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_global</word_pack>
+      <word_key>fmw_psb_posts</word_key>
+      <word_default>Posts</word_default>
+      <word_custom><![CDATA[Сообщений]]></word_custom>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_global</word_pack>
+      <word_key>fmw_psb_reputation</word_key>
+      <word_default>Reputation</word_default>
+      <word_custom><![CDATA[Репутация]]></word_custom>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_global</word_pack>
+      <word_key>fmw_psb_views</word_key>
+      <word_default>Views</word_default>
+      <word_custom><![CDATA[Просмотров]]></word_custom>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_global</word_pack>
+      <word_key>fmw_psb_title</word_key>
+      <word_default>My Information</word_default>
+      <word_custom><![CDATA[Моя информация]]></word_custom>
+    </language>
+  </hookextras_language>
+  <hookextras_modules/>
+  <hookextras_help/>
+  <hookextras_templates>
+    <templates>
+      <template_group>skin_boards</template_group>
+      <template_content><![CDATA[<div class="ipsSideBlock clearfix">
+  <h3>{$this->lang->words['fmw_psb_title']}</h3>
+  <div class="_sbcollapsable">
+    <div class="right fmw_sidebar">
+      <div class="fmw_block_user">
+        <br />
+        <img class="fmw_block_user_avatar" src="{$this->memberData['pp_main_photo']}">
+        <br /><br />
+        <span style="font-size: 22px;" data-tooltip="{$this->memberData['title']}">{$this->memberData['name']}</span>
+        <br />
+        <div class="fmw_user_bar">
+          <div class="fmw_user_bar_post left">
+            {$this->lang->words['fmw_psb_posts']}<br /><span style="font-weight: bold;">{$this->memberData['posts']}</span>
+          </div>
+          <div class="fmw_user_bar_rep left">
+            {$this->lang->words['fmw_psb_reputation']}<br /><span style="font-weight: bold;">{$this->memberData['pp_reputation_points']}</span>
+          </div>
+          <div class="fmw_user_bar_view left">
+            {$this->lang->words['fmw_psb_views']}<br /><span style="font-weight: bold;">{$this->memberData['members_profile_views']}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>]]></template_content>
+      <template_name>fmw_Profile_Block</template_name>
+      <template_data/>
+      <template_updated>1397564732</template_updated>
+      <template_removable>0</template_removable>
+      <template_added_to>0</template_added_to>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </templates>
+  </hookextras_templates>
+  <hookextras_css>
+    <css>
+      <css_updated>1397564732</css_updated>
+      <css_group>fmw_profile_block</css_group>
+      <css_content><![CDATA[.fmw_sidebar {
+  width: 100%;
+  cursor: pointer;
+}
+.fmw_block_user {
+  position: relative;
+  padding: 10px 30px;
+  height: 250px;
+  border-radius: 5px;
+  background: #415C71;
+  color: #fff;
+  text-align: center;
+}
+.fmw_user_bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 0 0 5px 5px;
+  background: #323A46;
+}
+.fmw_block_user_avatar {
+  max-width: 150px;
+  border: 3px solid #D50F1F;
+  border-radius: 180px;
+}
+.fmw_block_user_avatar:hover {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transform: rotate(-360deg);
+  -moz-transform: rotate(-360deg);
+  -ms-transform: rotate(-360deg);
+  -o-transform: rotate(-360deg);
+  transform: rotate(-360deg);
+}
+.fmw_user_bar_post {
+  padding-top: 5px;
+  width: calc( (100% - 2px) / 3);
+  border-top: 3px solid #FF1B79;
+  border-right: 1px solid #171a1e;
+  text-align: center;
+  line-height: 20px;
+}
+.fmw_user_bar_rep {
+  padding-top: 5px;
+  width: calc( (100% - 2px) / 3);
+  border-top: 3px solid #00C7AB;
+  border-right: 1px solid #171a1e;
+  text-align: center;
+  line-height: 20px;
+}
+.fmw_user_bar_view {
+  padding-top: 5px;
+  width: calc( (100% - 2px) / 3);
+  border-top: 3px solid #F7CD1F;
+  text-align: center;
+  line-height: 20px;
+}]]></css_content>
+      <css_position>10</css_position>
+      <css_added_to>0</css_added_to>
+      <css_app>core</css_app>
+      <css_app_hide>0</css_app_hide>
+      <css_attributes><![CDATA[media="screen"]]></css_attributes>
+      <css_modules/>
+      <css_removed>0</css_removed>
+      <css_master_key>root</css_master_key>
+    </css>
+  </hookextras_css>
+  <hookextras_replacements/>
+  <hookextras_tasks/>
+  <hookextras_database_create/>
+  <hookextras_database_alter/>
+  <hookextras_database_update/>
+  <hookextras_database_insert/>
+</hookexport>
